@@ -1,0 +1,1 @@
+include ':textchat-acc-pack', ':app', ':opentok-accelerator-core-1.0.0'
