@@ -20,15 +20,14 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.tokbox.android.accpack.AccPackSession;
 import com.tokbox.android.accpack.textchat.config.OpenTokConfig;
 import com.tokbox.android.logging.OTKAnalytics;
 import com.tokbox.android.logging.OTKAnalyticsData;
 import com.tokbox.android.otsdkwrapper.listeners.SignalListener;
 import com.tokbox.android.otsdkwrapper.signal.SignalInfo;
+import com.tokbox.android.otsdkwrapper.wrapper.OTAcceleratorSession;
 
 
 import org.json.JSONException;
@@ -70,7 +69,7 @@ public class TextChatFragment extends Fragment implements SignalListener {
     private List<ChatMessage> messagesList = new ArrayList<ChatMessage>();
     private MessagesAdapter mMessageAdapter;
 
-    private AccPackSession mSession;
+    private OTAcceleratorSession mSession;
     private String mApiKey;
 
     private OTKAnalyticsData mAnalyticsData;
@@ -118,10 +117,10 @@ public class TextChatFragment extends Fragment implements SignalListener {
 
     /**
      * Creates a new TextChatFragment instance
-     * @param session the opentok sdk instance
+     * @param session the opentok session instance
      * @param apiKey the partner id
      */
-    public static TextChatFragment newInstance(AccPackSession session, String apiKey) {
+    public static TextChatFragment newInstance(OTAcceleratorSession session, String apiKey) {
 
         if ( session == null || apiKey == null || apiKey.trim().length() == 0 ){
             throw new IllegalArgumentException("Arguments cannot be null");
