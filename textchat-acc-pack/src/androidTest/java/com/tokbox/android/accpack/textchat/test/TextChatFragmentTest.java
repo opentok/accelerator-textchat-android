@@ -4,10 +4,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.tokbox.android.accpack.AccPackSession;
 import com.tokbox.android.accpack.textchat.TextChatFragment;
 import com.tokbox.android.accpack.textchat.config.APIConfig;
 import com.tokbox.android.accpack.textchat.testbase.TestBase;
+import com.tokbox.android.otsdkwrapper.wrapper.OTAcceleratorSession;
 
 
 import junit.framework.Assert;
@@ -35,7 +35,7 @@ public  class TextChatFragmentTest extends TestBase {
     }
 
     public void TextChatFragmentWhenApiKeyIsNull() throws Exception {
-        session = new AccPackSession(context, null, sessionId);
+        session = new OTAcceleratorSession(context, null, sessionId);
         session.setSessionListener(sessionListener);
         session.connect(token);
         waitSessionConnected();
@@ -46,7 +46,7 @@ public  class TextChatFragmentTest extends TestBase {
 
     public void testTextChatFragmentWhenApiKeyIsEmpty() {
         try {
-            session = new AccPackSession(context, apiKey, sessionId);
+            session = new OTAcceleratorSession(context, apiKey, sessionId);
             session.setSessionListener(sessionListener);
             session.connect(token);
             waitSessionConnected();
@@ -61,7 +61,7 @@ public  class TextChatFragmentTest extends TestBase {
 
     public void testSetMaxLengthWhenMaxLengthIsGTMAX() {
         try {
-            session = new AccPackSession(context, apiKey, sessionId);
+            session = new OTAcceleratorSession(context, apiKey, sessionId);
             session.setSessionListener(sessionListener);
             session.connect(token);
             waitSessionConnected();
@@ -83,7 +83,7 @@ public  class TextChatFragmentTest extends TestBase {
     public void testSetMaxLengthWhenMaxLengthIsZero() {
 
         try {
-            session = new AccPackSession(context, apiKey, sessionId);
+            session = new OTAcceleratorSession(context, apiKey, sessionId);
             session.setSessionListener(sessionListener);
             session.connect(token);
             waitSessionConnected();
@@ -103,7 +103,7 @@ public  class TextChatFragmentTest extends TestBase {
     public void testSetMaxLengthWhenMaxLengthIsLTZero() {
 
         try {
-            session = new AccPackSession(context, apiKey, sessionId);
+            session = new OTAcceleratorSession(context, apiKey, sessionId);
             session.setSessionListener(sessionListener);
             session.connect(token);
             waitSessionConnected();
@@ -122,7 +122,7 @@ public  class TextChatFragmentTest extends TestBase {
 
     public void testSetSenderAliasWhenSenderAliasIsNull() {
         try {
-            session = new AccPackSession(context, apiKey, sessionId);
+            session = new OTAcceleratorSession(context, apiKey, sessionId);
             session.setSessionListener(sessionListener);
             session.connect(token);
             waitSessionConnected();
@@ -141,7 +141,7 @@ public  class TextChatFragmentTest extends TestBase {
 
     public void testSetSenderAliasWhenSenderAliasIsEmpty() {
         try {
-            session = new AccPackSession(context, apiKey, sessionId);
+            session = new OTAcceleratorSession(context, apiKey, sessionId);
             session.setSessionListener(sessionListener);
             session.connect(token);
             waitSessionConnected();
@@ -160,7 +160,7 @@ public  class TextChatFragmentTest extends TestBase {
 
     public void testSetActionBarWhenOK() throws Exception {
 
-        session = new AccPackSession(context, apiKey, sessionId);
+        session = new OTAcceleratorSession(context, apiKey, sessionId);
         session.setSessionListener(sessionListener);
         session.connect(token);
         waitSessionConnected();
@@ -179,7 +179,7 @@ public  class TextChatFragmentTest extends TestBase {
 
     public void testSetActionBarWhenActionBarIsNull() throws Exception {
         try {
-            session = new AccPackSession(context, apiKey, sessionId);
+            session = new OTAcceleratorSession(context, apiKey, sessionId);
             session.setSessionListener(sessionListener);
             session.connect(token);
             waitSessionConnected();
@@ -194,7 +194,7 @@ public  class TextChatFragmentTest extends TestBase {
     }
 
     public void testSetSendMessageViewWhenOK() throws Exception {
-        session = new AccPackSession(context, apiKey, sessionId);
+        session = new OTAcceleratorSession(context, apiKey, sessionId);
         session.setSessionListener(sessionListener);
         session.connect(token);
         waitSessionConnected();
@@ -213,7 +213,7 @@ public  class TextChatFragmentTest extends TestBase {
 
     public void testSetSendMessageViewWhenSendMessageViewIsNull() throws Exception {
         try {
-            session = new AccPackSession(context, apiKey, sessionId);
+            session = new OTAcceleratorSession(context, apiKey, sessionId);
             session.setSessionListener(sessionListener);
             session.connect(token);
             waitSessionConnected();
