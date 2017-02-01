@@ -2,7 +2,7 @@ set -e
 
 task="$1"
 
-cd TextChatAccPackKit
+cd textchat-acc-pack
 
 #Create local properties to fin Android SDK
 if [ ! -e "local.properties" ]
@@ -33,12 +33,17 @@ if [ "$task" == "-t" ]; then
         exit 0
 fi
 
-
 #Create zip file with binary and doc
 if [ "$task" == "-d" ]; then
         ./gradlew ZipBundleRelease
         exit 0
 fi
 
-echo Invalid parameters, please use ‘-b’ to build, ‘-t’ to run tests, ‘-d’ to create zip file with binary and doc or ‘-f’ to perform all actions.
+#Upload binary to Maven
+if [ "$task" == "-um" ]; then
+        ./gradlew uploadArchives
+        exit 0
+fi
+
+echo Invalid parameters, please use '-b' to build, '-t' to run unit tests, '-d' to create zip file with binary and doc, '-um' to upload to maven or '-f' to perform all actions.
 exit 1
