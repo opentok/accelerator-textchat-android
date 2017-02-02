@@ -1,6 +1,6 @@
 ![logo](../tokbox-logo.png)
 
-# OpenTok Text Chat Accelerator Pack for Android<br/>Version 2.1.0
+# Accelerator TextChat for Android<br/>Version 2.1.0
 
 ## Quick start
 
