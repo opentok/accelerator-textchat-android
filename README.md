@@ -1,4 +1,4 @@
-![logo](../tokbox-logo.png)
+![logo](tokbox-logo.png)
 
 # Accelerator TextChat for Android<br/>Version 2.1.0
 
@@ -47,8 +47,7 @@ compile 'com.opentok.android:opentok-accelerator-textchat:2.1.0'
 
 </ol>
 
-
-###  Exploring the code
+##  Exploring the code
 
 The `TextChatFragment` class is the backbone of the text chat communication feature.
 
@@ -71,7 +70,7 @@ public interface TextChatListener {
 }
 ```
 
-#### Initialization methods
+### Initialization methods
 
 The following `TextChatFragment` methods are used to initialize the app and provide basic information determining the behavior of the text chat functionality.
 
@@ -110,7 +109,7 @@ This lines of code illustrates how to set the maximum message length to 1050 cha
   }
 ```
 
-#### Sending and receiving messages
+### Sending and receiving messages
 
 By implementing the `TextChatFragment.TextChatListener` interface, the app can monitor both receiving and sending activity. For example, a message is successfully sent, or a message is sent with a code in the event of an error.
 
@@ -132,9 +131,9 @@ The `onNewReceivedMessage()` event is fired when a new `ChatMessage` is received
     }
 ```
 
-### One to one sample app using the Accelerator TextChat with best-practices for Android.
- - [TextChat Sample App](https://github.com/opentok/textchat-acc-pack).
- 
+### One to one sample app using the Accelerator TextChat with best-practices for Android (https://github.com/opentok/textchat-acc-pack).
+
+![screenshot](screenshot.png)
 
 
 
