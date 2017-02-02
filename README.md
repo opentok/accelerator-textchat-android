@@ -1,4 +1,4 @@
-![logo](../tokbox-logo.png)
+![logo](tokbox-logo.png)
 
 # Accelerator TextChat for Android<br/>Version 2.1.0
 
@@ -133,7 +133,7 @@ The `onNewReceivedMessage()` event is fired when a new `ChatMessage` is received
 
 ### One to one sample app using the Accelerator TextChat with best-practices for Android.
  - [TextChat Sample App](https://github.com/opentok/textchat-acc-pack).
-![logo](../screenshot.png)
+![screenshot](screenshot.png)
 
 
 
