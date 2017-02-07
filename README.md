@@ -10,7 +10,7 @@ This section shows you how to use the accelerator textchat.
 
 There are two options for installing the OpenTok Accelerator TextChat library:
 
-  - [Using the repository](using-the-repository)
+  - [Using the repository](#using-the-repository)
   - [Using Maven](#using-maven)
  
 **NOTE**: The Accelerator TextChat includes the [OpenTok Accelerator Core for Android](https://github.com/opentok/accelerator-core-android).
@@ -131,7 +131,7 @@ The `onNewReceivedMessage()` event is fired when a new `ChatMessage` is received
     }
 ```
 
-### One to one sample app using the Accelerator TextChat with best-practices for Android (https://github.com/opentok/textchat-acc-pack).
+### One to one sample app using the Accelerator TextChat with best-practices for [Android](https://github.com/opentok/textchat-acc-pack/tree/master/android) (https://github.com/opentok/textchat-acc-pack).
 
 ![screenshot](screenshot.png)
 
