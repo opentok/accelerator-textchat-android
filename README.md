@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/opentok/accelerator-textchat-android.svg?token=CxoLD2TL8UCwsuAUJUsN&branch=master)](https://travis-ci.com/opentok/accelerator-textchat-android)
 
-# Accelerator TextChat for Android<br/>Version 2.1.0
+# Accelerator TextChat for Android<br/>Version 1.0.0
 
 ## Quick start
 
@@ -42,7 +42,7 @@ maven { url  "http://tokbox.bintray.com/maven" }
 <li>Modify the <b>build.gradle</b> for your activity and add the following code snippet to the section labeled 'dependencies’:
 
 <code>
-compile 'com.opentok.android:opentok-accelerator-textchat:2.1.0'
+compile 'com.opentok.android:opentok-accelerator-textchat:1.0.0'
 </code>
 
 </li>
