@@ -3,20 +3,23 @@ jdk: oraclejdk8
 
 android:
   components:
-    - platform-tools
-    - tools
-    - build-tools-25.0.1
-    - android-25
-    - add-on
-    - extra-android-m2repository
+  - platform-tools
+  - tools
+  - build-tools-25.0.1
+  - android-25
+  - add-on
+  - extra-android-m2repository
 
 before_script:
-    - wget http://services.gradle.org/distributions/gradle-2.14.1-bin.zip
-    - unzip gradle-2.14.1-bin.zip
-    - export GRADLE_HOME=$PWD/gradle-2.14.1
-    - export PATH=$GRADLE_HOME/bin:$PATH
-    - gradle wrapper
+- wget http://services.gradle.org/distributions/gradle-2.14.1-bin.zip
+- unzip gradle-2.14.1-bin.zip
+- export GRADLE_HOME=$PWD/gradle-2.14.1
+- export PATH=$GRADLE_HOME/bin:$PATH
+- gradle wrapper
 
 script:
-  - ./gradlew test
+- ./gradlew test
 
+notifications:
+  slack:
+    secure: BqYJ2HA02ji8CotN6hqLZScajS3byBWOXXTOvTrUt3eR8xC+91tPa57O28ejE57dZzvo3YIzetleFH+jqQ9B8Iu+Imo+5iVjqCO8k4ojPdz9/TVPIG2dM93qOJN0jHpM8vGUiLQgJeY/OJYA+EjK/SgBdPFXrvm1kiCc//nl49IFpW1MoctdYTyoU8bUhKN7xweXoYhPk5YfNzxu9UDlkimpi/nlUVUmN0yNyvMyhKxhRNMDEbgpuAZYifCIa6bpHWckE/xKhCN5BNRB1TJsNCRvHOAYdrzEC4GipavnipoinpsyA7SvFhlm5Bywi0+RvhvRO0caLOkPvfQtvTnrXR//FXGN/A6nxgFKDi6NYaw1npQ5JETE6tJSbtsMOAOqVfoUYcgFheOaujtpzHbYoxkKWnQEhABzMFp2UWlokquL4+MiuWd7OXbs0EveHke5GsEzudrqHwX/CUxz+JF1WDJHgJqubmz7yiS+KOftzmQfFtVVr51HknVUol17DomsZ7jbeputdt/18SIEGSnuXq8/lNTJZckG7wl/0wJJzP04ab1KOCoi3fVAI3MLsW50VkcgTXMj4iw4WYgQ6SJjEmAlU+xQ6d3CeFu6TBuEPRzxmISn8UpAb/BTEQLxBRYDpzcwIo3jlHk24Y1Pr63d53uFXgdx4fx8dHZ8kJVBb5c=
