@@ -1,6 +1,6 @@
 ![logo](tokbox-logo.png)
 
-# Accelerator TextChat for Android<br/>Version 1.0.0
+# Accelerator TextChat for Android<br/>Version 1.0.+
 [![Build Status](https://travis-ci.org/opentok/accelerator-textchat-android.svg?branch=master)](https://travis-ci.org/opentok/accelerator-textchat-android)
 
 ## Quick start
