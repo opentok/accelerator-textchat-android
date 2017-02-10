@@ -9,9 +9,9 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 2
-        versionName "1.0.0"
+        versionName "1.0.1"
         project.archivesBaseName = "opentok-accelerator-textchat"
-        project.version = "1.0.0"
+        project.version = "1.0.1"
     }
     buildTypes {
         release {
@@ -108,5 +108,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.android.support:design:25.+'
-    compile 'com.opentok.android:opentok-accelerator-core:1.0.0'
+    compile 'com.opentok.android:opentok-accelerator-core:1.0.+'
 }
