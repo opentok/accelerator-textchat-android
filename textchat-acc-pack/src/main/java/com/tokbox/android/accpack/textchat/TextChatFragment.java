@@ -337,7 +337,9 @@ public class TextChatFragment extends Fragment implements SignalListener {
         mRecyclerView.setAdapter(mMessageAdapter);
     }
 
-    //Private methods
+    /**
+     * Internal initialization of the TextChatFragment
+     */
     public void init(){
         //internal client logs
         String source = getContext().getPackageName();
@@ -365,6 +367,7 @@ public class TextChatFragment extends Fragment implements SignalListener {
         addLogEvent(OpenTokConfig.LOG_ACTION_INITIALIZE, OpenTokConfig.LOG_VARIATION_SUCCESS);
     }
 
+    //Private methods
     //Add a message to the message list.
     private void addMessage(final ChatMessage msg) throws Exception {
         Log.i(LOG_TAG, "New message " + msg.getText() + " is ready to be added.");
