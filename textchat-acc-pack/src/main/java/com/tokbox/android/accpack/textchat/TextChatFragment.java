@@ -29,7 +29,7 @@ import com.tokbox.android.otsdkwrapper.listeners.SignalListener;
 import com.tokbox.android.otsdkwrapper.signal.SignalInfo;
 import com.tokbox.android.otsdkwrapper.wrapper.OTAcceleratorSession;
 
-
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -141,24 +141,6 @@ public class TextChatFragment extends Fragment implements SignalListener {
 
         // Retain this fragment across configuration changes.
         setRetainInstance(true);
-
-        String source = getContext().getPackageName();
-
-        SharedPreferences prefs = getContext().getSharedPreferences("opentok", Context.MODE_PRIVATE);
-        String guidVSol = prefs.getString("guidVSol", null);
-        if (null == guidVSol) {
-            guidVSol = UUID.randomUUID().toString();
-            prefs.edit().putString("guidVSol", guidVSol).commit();
-        }
-
-        mAnalyticsData = new OTKAnalyticsData.Builder(OpenTokConfig.LOG_CLIENT_VERSION, source, OpenTokConfig.LOG_COMPONENTID, guidVSol).build();
-        mAnalytics = new OTKAnalytics(mAnalyticsData);
-        mAnalytics.enableConsoleLog(false);
-        mAnalyticsData.setPartnerId(mApiKey);
-        mAnalytics. setData(mAnalyticsData);
-
-        addLogEvent(OpenTokConfig.LOG_ACTION_INITIALIZE, OpenTokConfig.LOG_VARIATION_ATTEMPT);
-        addLogEvent(OpenTokConfig.LOG_ACTION_INITIALIZE, OpenTokConfig.LOG_VARIATION_SUCCESS);
     }
 
     @Override
@@ -220,8 +202,6 @@ public class TextChatFragment extends Fragment implements SignalListener {
         });
 
         updateTitle(defaultTitle());
-
-        init();
 
         return rootView;
     }
@@ -357,11 +337,37 @@ public class TextChatFragment extends Fragment implements SignalListener {
         mRecyclerView.setAdapter(mMessageAdapter);
     }
 
-    //Private methods
-    private void init(){
+    /**
+     * Internal initialization of the TextChatFragment
+     */
+    public void init(){
+        //internal client logs
+        String source = getContext().getPackageName();
+
+        SharedPreferences prefs = getContext().getSharedPreferences("opentok", Context.MODE_PRIVATE);
+        String guidVSol = prefs.getString("guidVSol", null);
+        if (null == guidVSol) {
+            guidVSol = UUID.randomUUID().toString();
+            prefs.edit().putString("guidVSol", guidVSol).commit();
+        }
+
+        mAnalyticsData = new OTKAnalyticsData.Builder(OpenTokConfig.LOG_CLIENT_VERSION, source, OpenTokConfig.LOG_COMPONENTID, guidVSol).build();
+        if (mSession.getConnection() != null) {
+            //session is connected
+            mAnalyticsData.setConnectionId(mSession.getConnection().getConnectionId());
+        }
+        mAnalytics = new OTKAnalytics(mAnalyticsData);
+
+        mAnalytics.enableConsoleLog(false);
+        mAnalyticsData.setPartnerId(mApiKey);
+        mAnalytics. setData(mAnalyticsData);
+
+        addLogEvent(OpenTokConfig.LOG_ACTION_INITIALIZE, OpenTokConfig.LOG_VARIATION_ATTEMPT);
         this.mSession.addSignalListener(SIGNAL_TYPE, this);
+        addLogEvent(OpenTokConfig.LOG_ACTION_INITIALIZE, OpenTokConfig.LOG_VARIATION_SUCCESS);
     }
 
+    //Private methods
     //Add a message to the message list.
     private void addMessage(final ChatMessage msg) throws Exception {
         Log.i(LOG_TAG, "New message " + msg.getText() + " is ready to be added.");
@@ -572,14 +578,24 @@ public class TextChatFragment extends Fragment implements SignalListener {
         Long date = null;
         ChatMessage msg;
         JSONObject json;
+        JSONObject sender;
 
         try {
-            json = new JSONObject((String)signalInfo.mData);
-            text = json.getString("text");
-            date = json.getLong("sentOn");
-            JSONObject sender = json.getJSONObject("sender");
-            senderId = sender.getString("id");
-            senderAlias = sender.getString("alias");
+            if (signalInfo.mData != null && isValid((String)signalInfo.mData)) {
+                json = new JSONObject((String) signalInfo.mData);
+                if (!json.isNull("text") && !json.isNull("sentOn") && !json.isNull("sender")) {
+                    text = json.getString("text");
+                    date = json.getLong("sentOn");
+                    sender = json.getJSONObject("sender");
+                    senderId = sender.getString("id");
+                    senderAlias = sender.getString("alias");
+                } else {
+                    Log.e(LOG_TAG, "The received message has not a supported format.");
+                }
+            }
+            else {
+                Log.e(LOG_TAG, "The received message is not a valid JSON object");
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -639,5 +655,18 @@ public class TextChatFragment extends Fragment implements SignalListener {
                 }
             }
         }
+    }
+
+    private boolean isValid(String message){
+        try {
+            new JSONObject(message);
+        } catch (JSONException ex) {
+            try {
+                new JSONArray(message);
+            } catch (JSONException ex1) {
+                return false;
+            }
+        }
+        return true;
     }
 }
