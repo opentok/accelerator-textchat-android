@@ -137,6 +137,6 @@ The `onNewReceivedMessage()` event is fired when a new `ChatMessage` is received
     }
 ```
 
-### One to one sample app using the Accelerator TextChat with best-practices for [Android](https://github.com/opentok/one-to-one-textchat-sample-apps).
+### Multiparty sample app using the Accelerator TextChat with best-practices for [Android](https://github.com/opentok/accelerator-sample-apps-android).
 
 ![screenshot](screenshot.png)
