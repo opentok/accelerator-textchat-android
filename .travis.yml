@@ -18,7 +18,15 @@ before_script:
 - gradle wrapper
 
 script:
-- ./gradlew test
+- if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then
+    ./gradlew uploadArchives -PMAVEN_USERNAME=$MAVEN_USERNAME -PMAVEN_PASSWORD=$MAVEN_PASSWORD;
+    PRINTVERSION=$(./gradlew -q printVersionRelease);
+    VERSION=$(echo $PRINTVERSION | cut -c -5);
+    git tag v$VERSION;
+    git push origin v$VERSION;
+  else
+    ./gradlew build;
+  fi
 
 notifications:
   slack:
