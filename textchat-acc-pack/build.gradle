@@ -3,7 +3,7 @@ apply plugin: 'maven'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         minSdkVersion 16
@@ -109,8 +109,8 @@ def getRevisionAndTime() {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:+'
-    compile 'com.android.support:recyclerview-v7:+'
-    compile 'com.android.support:design:25.+'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
     compile 'com.opentok.android:opentok-accelerator-core:1.0.+'
 }
