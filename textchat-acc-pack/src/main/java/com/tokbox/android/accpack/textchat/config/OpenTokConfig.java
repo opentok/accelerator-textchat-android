@@ -1,10 +1,12 @@
 package com.tokbox.android.accpack.textchat.config;
 
+import com.tokbox.android.accpack.textchat.BuildConfig;
+
 public class OpenTokConfig {
 
     // For internal use only. Please do not modify or remove this code.
     public static final String LOGGING_BASE_URL = "https://hlg.tokbox.com/prod/logging/ClientEvent";
-    public static final String LOG_CLIENT_VERSION = "android-vsol-1.0.2";
+    public static final String LOG_CLIENT_VERSION = BuildConfig.acceleratorVersion;
     public static final String LOG_COMPONENTID = "textChatAccPack";
     public static final String LOG_ACTION_INITIALIZE = "Init";
     public static final String LOG_ACTION_OPEN = "OpenTC";
