@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
 android {
-    def acceleratorVersion = '1.0.4'
+    def acceleratorVersion = '1.0.5'
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
 
@@ -10,19 +10,14 @@ android {
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 2
-        versionName "1.0.4"
+        versionName "1.0.5"
         project.archivesBaseName = "opentok-accelerator-textchat"
         project.version = acceleratorVersion
     }
     buildTypes {
         release {
             minifyEnabled false
-            buildConfigField "String", "acceleratorVersion", '\"'+acceleratorVersion+'\"'
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            minifyEnabled false
-            buildConfigField "String", "acceleratorVersion", '\"'+acceleratorVersion+'\"'
+            buildConfigField 'String', 'acceleratorVersion', '\"'+acceleratorVersion+'\"'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
