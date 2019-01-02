@@ -90,7 +90,7 @@ The following `TextChatFragment` methods are used to initialize the app and prov
 For example, the following private method instantiates a `TextChatFragment` object:
 
 ```java
-  OTAcceleratorSession mSession = new OTAcceleratorSession (context, sessionId, apikey);
+  OTAcceleratorSession mSession = new OTAcceleratorSession (context, apikey, sessionId);
   mSession.connect(token);
 
   //...
