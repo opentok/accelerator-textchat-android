@@ -20,6 +20,10 @@ android {
             buildConfigField 'String', 'acceleratorVersion', '\"'+acceleratorVersion+'\"'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+            buildConfigField 'String', 'acceleratorVersion', '\"'+acceleratorVersion+'\"'
+        }
     }
 
     lintOptions {
