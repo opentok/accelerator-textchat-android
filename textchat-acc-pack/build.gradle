@@ -2,15 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
 android {
-    def acceleratorVersion = '1.0.5'
-    compileSdkVersion 27
-    buildToolsVersion "27.0.2"
+    def acceleratorVersion = '1.0.6'
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 29
         versionCode 2
-        versionName "1.0.5"
+        versionName "1.0.6"
         project.archivesBaseName = "opentok-accelerator-textchat"
         project.version = acceleratorVersion
     }
@@ -40,7 +40,8 @@ android {
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.aar')) {
                 def fileName = "${archivesBaseName}-${version}.aar"
-                output.outputFile = new File(outputFile.parent, fileName)
+                //output.outputFile = new File(outputFile.parent, fileName)
+                output.outputFileName = fileName
             }
         }
 
@@ -113,10 +114,10 @@ def getRevisionAndTime() {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile 'com.android.support:recyclerview-v7:27.0.2'
-    compile 'com.android.support:design:27.0.2'
-    compile 'com.opentok.android:opentok-accelerator-core:1.0.+'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation 'junit:junit:4.12'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.opentok.android:opentok-accelerator-core:1.0.+'
 }
