@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
 android {
-    def acceleratorVersion = '1.0.8'
+    def acceleratorVersion = '1.0.9'
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
 
