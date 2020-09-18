@@ -27,7 +27,7 @@ There are two options for installing the OpenTok Accelerator TextChat library:
 4. Open the **build.gradle** file for the app and ensure the following line has been added to the `dependencies` section:
 
 ```gradle
-compile project(':accelerator-textchat-android')
+implementation project(':accelerator-textchat-android')
 ```
 
 #### Using Maven
@@ -45,7 +45,7 @@ maven { url  "http://tokbox.bintray.com/maven" }
 <li>Modify the <b>build.gradle</b> for your activity and add the following code snippet to the section labeled 'dependencies’:
 
 <code>
-compile 'com.opentok.android:opentok-accelerator-textchat:1.0.+'
+implementation   'com.opentok.android:opentok-accelerator-textchat:1.0.+'
 </code>
 
 </li>
