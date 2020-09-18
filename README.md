@@ -45,7 +45,7 @@ maven { url  "http://tokbox.bintray.com/maven" }
 <li>Modify the <b>build.gradle</b> for your activity and add the following code snippet to the section labeled 'dependencies’:
 
 <code>
-implementation   'com.opentok.android:opentok-accelerator-textchat:1.0.+'
+implementation   'com.opentok.android:opentok-accelerator-textchat:x.y.z'
 </code>
 
 </li>
@@ -56,7 +56,7 @@ implementation   'com.opentok.android:opentok-accelerator-textchat:1.0.+'
 
 The `TextChatFragment` class is the backbone of the text chat communication feature.
 
-This class, which inherits from the [`android.support.v4.app.Fragment`](http://developer.android.com/intl/es/reference/android/support/v4/app/Fragment.html) class, sets up the text chat UI views and events, sets up session listeners, and defines a listener interface to monitor the changes.
+This class, which inherits from the [`androidx.fragment.app.Fragment`](https://developer.android.com/reference/androidx/fragment/app/Fragment) class, sets up the text chat UI views and events, sets up session listeners, and defines a listener interface to monitor the changes.
 
 ```java
 public class TextChatFragment extends Fragment implements SignalListener {
