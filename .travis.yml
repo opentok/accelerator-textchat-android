@@ -11,6 +11,9 @@ android:
   - extra-android-m2repository
   - extra-google-m2repository
 
+before_install:
+  - yes | sdkmanager "platforms;android-30"
+
 before_script:
 - wget https://services.gradle.org/distributions/gradle-6.6.1-bin.zip
 - unzip gradle-6.6.1-bin.zip
