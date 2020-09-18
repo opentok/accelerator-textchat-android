@@ -45,7 +45,7 @@ maven { url  "http://tokbox.bintray.com/maven" }
 <li>Modify the <b>build.gradle</b> for your activity and add the following code snippet to the section labeled 'dependencies’:
 
 <code>
-implementation   'com.opentok.android:opentok-accelerator-textchat:x.y.z'
+implementation 'com.opentok.android:opentok-accelerator-textchat:x.y.z'
 </code>
 
 </li>
