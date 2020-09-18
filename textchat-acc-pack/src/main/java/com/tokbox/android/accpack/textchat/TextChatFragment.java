@@ -149,17 +149,17 @@ public class TextChatFragment extends Fragment implements SignalListener {
         // Inflate the layout for this fragment
         rootView = (ViewGroup) inflater.inflate(R.layout.main_layout, container, false);
 
-        mMsgEditText = (EditText) rootView.findViewById(R.id.edit_msg);
-        mTitleBar = (TextView) rootView.findViewById(R.id.titlebar);
-        mCloseBtn = (ImageButton) rootView.findViewById(R.id.close);
-        mActionBarView = (ViewGroup) rootView.findViewById(R.id.action_bar);
-        mSendMessageView = (ViewGroup) rootView.findViewById(R.id.send_msg);
-        mMsgCharsView = (TextView) rootView.findViewById(R.id.characteres_msg);
+        mMsgEditText = rootView.findViewById(R.id.edit_msg);
+        mTitleBar = rootView.findViewById(R.id.titlebar);
+        mCloseBtn = rootView.findViewById(R.id.close);
+        mActionBarView = rootView.findViewById(R.id.action_bar);
+        mSendMessageView = rootView.findViewById(R.id.send_msg);
+        mMsgCharsView = rootView.findViewById(R.id.characteres_msg);
         mMsgCharsView.setText(String.valueOf(maxTextLength));
         mMsgEditText.addTextChangedListener(mTextEditorWatcher);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(layoutManager);
 
         mMsgEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -348,7 +348,7 @@ public class TextChatFragment extends Fragment implements SignalListener {
         String guidVSol = prefs.getString("guidVSol", null);
         if (null == guidVSol) {
             guidVSol = UUID.randomUUID().toString();
-            prefs.edit().putString("guidVSol", guidVSol).commit();
+            prefs.edit().putString("guidVSol", guidVSol).apply();
         }
 
         mAnalyticsData = new OTKAnalyticsData.Builder(OpenTokConfig.LOG_CLIENT_VERSION, source, OpenTokConfig.LOG_COMPONENTID, guidVSol).build();
