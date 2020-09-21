@@ -1,16 +1,14 @@
 package com.tokbox.android.accpack.textchat;
 
-
 import android.os.Build;
 import android.util.Log;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 import java.util.UUID;
 
 /**
- * The chat message class contains methods for the message status, sender ID and alias, the chat text, and the chat message timestamp. 
+ * The chat message class contains methods for the message status, sender ID and alias, the chat text, and the chat message timestamp.
  */
 public class ChatMessage {
 
@@ -18,9 +16,11 @@ public class ChatMessage {
 
     private static final int MAX_ALIAS_LENGTH = 50;
     private static final int MAX_SENDERID_LENGTH = 1000;
-    private final static int MAX_TEXT_LENGTH = 8196;
+    private static final int MAX_TEXT_LENGTH = 8196;
     private static final int MAX_MESSAGEID_LENGTH = 36;
     private static final String RELEASE_DATE = "2016-05-01";
+    public static final int BASE_PRIME = 17;
+    public static final int ODD_PRIME = 31;
 
     private final String senderId; //required
     private final MessageStatus messageStatus; //required
@@ -32,7 +32,7 @@ public class ChatMessage {
     /**
      * Enumerations for sent and received message status.
      */
-    public static enum MessageStatus {
+    public enum MessageStatus {
         /**
          * The status for a sent message.
          */
@@ -61,13 +61,13 @@ public class ChatMessage {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             return Objects.hash(senderId, messageStatus, messageId, senderAlias, text, timestamp);
         } else {
-            int result = 17;
-            result = 31 * result + senderId.hashCode();
-            result = 31 * result + messageStatus.hashCode();
-            result = 31 * result + messageId.hashCode();
-            result = 31 * result + senderAlias.hashCode();
-            result = 31 * result + text.hashCode();
-            result = 31 * result + (int)(timestamp ^ (timestamp >>> 32));
+            int result = BASE_PRIME;
+            result = ODD_PRIME * result + senderId.hashCode();
+            result = ODD_PRIME * result + messageStatus.hashCode();
+            result = ODD_PRIME * result + messageId.hashCode();
+            result = ODD_PRIME * result + senderAlias.hashCode();
+            result = ODD_PRIME * result + text.hashCode();
+            result = ODD_PRIME * result + (int) (timestamp ^ (timestamp >>> 32));
             return result;
         }
     }
@@ -221,7 +221,7 @@ public class ChatMessage {
                 throw new Exception("Sender alias string cannot be greater than "+MAX_ALIAS_LENGTH);
             }
             else {
-                if ( senderAlias == null || senderAlias.length() == 0 || senderAlias.trim().length() == 0 ){
+                if ( senderAlias == null || senderAlias.trim().length() == 0 ){
                     throw new Exception("Sender alias cannot be null or empty");
                 }
             }
@@ -238,7 +238,7 @@ public class ChatMessage {
                 throw new Exception("Text string cannot be greater than "+MAX_TEXT_LENGTH);
             }
             else {
-                if ( text == null || text.length() == 0 || text.trim().length() == 0 ){
+                if ( text == null || text.trim().length() == 0 ){
                     throw new Exception("Text cannot be null or empty");
                 }
             }

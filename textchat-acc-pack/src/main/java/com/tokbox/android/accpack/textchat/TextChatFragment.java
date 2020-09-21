@@ -45,12 +45,12 @@ import java.util.concurrent.TimeUnit;
 
 public class TextChatFragment extends Fragment implements SignalListener {
 
-    private final static String LOG_TAG = Fragment.class.getSimpleName();
+    private static final String LOG_TAG = Fragment.class.getSimpleName();
 
-    private final static int MAX_OPENTOK_LENGTH = 8196;
-    private final static int MAX_DEFAULT_LENGTH = 1000;
-    private final static String DEFAULT_SENDER_ALIAS = "me";
-    private final static String SIGNAL_TYPE = "text-chat";
+    private static final int MAX_OPENTOK_LENGTH = 8196;
+    private static final int MAX_DEFAULT_LENGTH = 1000;
+    private static final String DEFAULT_SENDER_ALIAS = "me";
+    private static final String SIGNAL_TYPE = "text-chat";
 
     private RecyclerView mRecyclerView;
     private ViewGroup rootView;
@@ -370,9 +370,8 @@ public class TextChatFragment extends Fragment implements SignalListener {
     //Private methods
     //Add a message to the message list.
     private void addMessage(final ChatMessage msg) throws Exception {
-        Log.i(LOG_TAG, "New message " + msg.getText() + " is ready to be added.");
-
         if (msg != null) {
+            Log.i(LOG_TAG, "New message " + msg.getText() + " is ready to be added.");
             if (!senders.containsKey(msg.getSenderId())) {
                 if (msg.getSenderAlias() != null && !msg.getSenderAlias().isEmpty()) {
                     senders.put(msg.getSenderId(), msg.getSenderAlias());
@@ -408,6 +407,8 @@ public class TextChatFragment extends Fragment implements SignalListener {
 
                 }
             });
+        } else {
+            Log.i(LOG_TAG, "New message is NULL");
         }
     }
 
@@ -449,10 +450,7 @@ public class TextChatFragment extends Fragment implements SignalListener {
 
     //Check the time between the current new message and the last added message
     private boolean checkTimeMsg(long lastMsgTime, long newMsgTime) {
-        if (lastMsgTime - newMsgTime <= TimeUnit.MINUTES.toMillis(2)) {
-            return true;
-        }
-        return false;
+        return (lastMsgTime - newMsgTime <= TimeUnit.MINUTES.toMillis(2));
     }
 
     //Check messages group
