@@ -1,10 +1,12 @@
 package com.tokbox.android.accpack.textchat;
 
 
+import android.os.Build;
 import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -39,6 +41,40 @@ public class ChatMessage {
          * The status for a received message.
          */
         RECEIVED_MESSAGE
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChatMessage)) return false;
+        ChatMessage that = (ChatMessage) o;
+        return timestamp == that.timestamp &&
+                strCompare(senderId, that.senderId) &&
+                messageStatus == that.messageStatus &&
+                messageId.equals(that.messageId) &&
+                strCompare(senderAlias, that.senderAlias) &&
+                strCompare(text, that.text);
+    }
+
+    @Override
+    public int hashCode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return Objects.hash(senderId, messageStatus, messageId, senderAlias, text, timestamp);
+        } else {
+            int result = 17;
+            result = 31 * result + senderId.hashCode();
+            result = 31 * result + messageStatus.hashCode();
+            result = 31 * result + messageId.hashCode();
+            result = 31 * result + senderAlias.hashCode();
+            result = 31 * result + text.hashCode();
+            result = 31 * result + (int)(timestamp ^ (timestamp >>> 32));
+            return result;
+        }
+    }
+
+    // To support API 16 . Reason: Object class added in API 19
+    private boolean strCompare(String str1, String str2) {
+        return (str1 == null ? str2 == null : str1.equals(str2));
     }
 
     /**

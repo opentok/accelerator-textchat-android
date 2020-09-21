@@ -391,7 +391,7 @@ public class TextChatFragment extends Fragment implements SignalListener {
                 public void run() {
                     if (!checkMessageGroup(msg)) {
                         messagesList.add(msg);
-                        mMessageAdapter.notifyDataSetChanged();
+                        mMessageAdapter.submitList(messagesList);
                     } else {
                         //concat text for the messages group
                         String msgText = messagesList.get(messagesList.size() - 1).getText() + "\r\n" + msg.getText();
@@ -401,7 +401,7 @@ public class TextChatFragment extends Fragment implements SignalListener {
                             e.printStackTrace();
                         }
                         messagesList.set(messagesList.size() - 1, msg);
-                        mMessageAdapter.notifyDataSetChanged();
+                        mMessageAdapter.submitList(messagesList);
                     }
 
                     mRecyclerView.smoothScrollToPosition(mMessageAdapter.getItemCount() - 1); //update based on adapter

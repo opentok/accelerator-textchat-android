@@ -1,5 +1,8 @@
 package com.tokbox.android.accpack.textchat;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.AsyncListDiffer;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +16,14 @@ import java.util.List;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>{
 
-    private List<ChatMessage> messagesList = new ArrayList<ChatMessage>();
+    private AsyncListDiffer<ChatMessage> messagesList = new AsyncListDiffer<ChatMessage>(this,DIFF_CALLBACK);
     private View messageView;
 
     public MessagesAdapter(List<ChatMessage> messagesList) throws Exception{
         if (messagesList == null) {
             throw new Exception("MessageList cannot be null");
         }
-        this.messagesList = messagesList;
+        this.messagesList.submitList(messagesList);
     }
 
     @Override
@@ -31,9 +34,13 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
     }
 
+    public void submitList(List<ChatMessage> list) {
+        messagesList.submitList(list);
+    }
+
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
-        ChatMessage message = messagesList.get(position);
+        ChatMessage message = messagesList.getCurrentList().get(position);
         SimpleDateFormat ft =
                 new SimpleDateFormat("hh:mm a");
         if ( message.getSenderAlias() != null && !message.getSenderAlias().isEmpty()) {
@@ -49,14 +56,14 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
     @Override
     public int getItemCount() {
-        return (null != messagesList ? messagesList.size() : 0);
+        return messagesList.getCurrentList().size();
     }
 
     @Override
     public int getItemViewType(int position) {
 
         if ( messagesList != null ) {
-            ChatMessage item = messagesList.get(position);
+            ChatMessage item = messagesList.getCurrentList().get(position);
 
             if(item.getMessageStatus() == ChatMessage.MessageStatus.SENT_MESSAGE) {
                 return R.layout.sent_row;
@@ -85,5 +92,20 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             this.initial = (TextView) view.findViewById(R.id.initial);
         }
     }
-
+    public static final DiffUtil.ItemCallback<ChatMessage> DIFF_CALLBACK
+            = new DiffUtil.ItemCallback<ChatMessage>() {
+        @Override
+        public boolean areItemsTheSame(
+                @NonNull ChatMessage oldMsg, @NonNull ChatMessage newMsg) {
+            // Message properties may have changed if reloaded from the DB, but ID is fixed
+            return oldMsg.getMessageId() == newMsg.getMessageId();
+        }
+        @Override
+        public boolean areContentsTheSame(
+                @NonNull ChatMessage oldMsg, @NonNull ChatMessage newMsg) {
+            // NOTE: if you use equals, your object must properly override Object#equals()
+            // Incorrectly returning false here will result in too many animations.
+            return oldMsg.equals(newMsg);
+        }
+    };
 }
