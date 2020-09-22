@@ -34,8 +34,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
         ChatMessage message = messagesList.get(position);
-        SimpleDateFormat ft =
-                new SimpleDateFormat("hh:mm a");
+        SimpleDateFormat ft = new SimpleDateFormat("hh:mm a");
         if ( message.getSenderAlias() != null && !message.getSenderAlias().isEmpty()) {
             holder.msgInfo.setText(message.getSenderAlias() + ", " + ft.format(new Date(message.getTimestamp())).toString());
             holder.initial.setText(String.valueOf(Character.toUpperCase((message.getSenderAlias().charAt(0)))));
