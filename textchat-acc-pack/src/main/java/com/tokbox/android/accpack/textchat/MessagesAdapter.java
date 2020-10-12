@@ -17,9 +17,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
     private AsyncListDiffer<ChatMessage> mDiffer ;
 
-    public MessagesAdapter(List<ChatMessage> messagesList) throws Exception{
+    public MessagesAdapter() throws Exception{
         mDiffer = new AsyncListDiffer<>(this, DIFF_CALLBACK);
-        mDiffer.submitList(messagesList);
     }
 
     @Override
