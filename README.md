@@ -1,7 +1,7 @@
 # Accelerator TextChat for Android
 
 [![Build Status](https://travis-ci.org/opentok/accelerator-textchat-android.svg?branch=master)](https://travis-ci.org/opentok/accelerator-textchat-android)
-[![GitHub release](https://img.shields.io/github/release/opentok/accelerator-textchat-android.svg)](./README.md)
+[![GitHub release](https://img.shields.io/github/tag/opentok/accelerator-textchat-android.svg)](./README.md)
 [![license MIT](https://img.shields.io/github/license/mashape/apistatus.svg)](./.github/LICENSE)
 
 <img src="https://assets.tokbox.com/img/vonage/Vonage_VideoAPI_black.svg" height="48px" alt="Tokbox is now known as Vonage" />
