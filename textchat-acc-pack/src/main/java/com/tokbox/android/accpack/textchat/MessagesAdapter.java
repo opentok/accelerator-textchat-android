@@ -15,13 +15,10 @@ import java.util.List;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>{
 
-    private AsyncListDiffer<ChatMessage> messagesList = new AsyncListDiffer<>(this, DIFF_CALLBACK);
+    private AsyncListDiffer<ChatMessage> mDiffer ;
 
-    public MessagesAdapter(List<ChatMessage> messagesList) throws Exception{
-        if (messagesList == null) {
-            throw new Exception("MessageList cannot be null");
-        }
-        this.messagesList.submitList(messagesList);
+    public MessagesAdapter() throws Exception{
+        mDiffer = new AsyncListDiffer<>(this, DIFF_CALLBACK);
     }
 
     @Override
@@ -33,12 +30,12 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     }
 
     public void submitList(List<ChatMessage> list) {
-        messagesList.submitList(list);
+        mDiffer.submitList(list);
     }
 
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
-        ChatMessage message = messagesList.getCurrentList().get(position);
+        ChatMessage message = mDiffer.getCurrentList().get(position);
         SimpleDateFormat ft = new SimpleDateFormat("hh:mm a");
         if ( message.getSenderAlias() != null && !message.getSenderAlias().isEmpty()) {
             holder.msgInfo.setText(message.getSenderAlias() + ", " + ft.format(new Date(message.getTimestamp())));
@@ -53,14 +50,14 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
     @Override
     public int getItemCount() {
-        return messagesList.getCurrentList().size();
+        return mDiffer.getCurrentList().size();
     }
 
     @Override
     public int getItemViewType(int position) {
 
-        if ( messagesList != null ) {
-            ChatMessage item = messagesList.getCurrentList().get(position);
+        if ( mDiffer != null ) {
+            ChatMessage item = mDiffer.getCurrentList().get(position);
 
             if(item.getMessageStatus() == ChatMessage.MessageStatus.SENT_MESSAGE) {
                 return R.layout.sent_row;
@@ -97,7 +94,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         public boolean areItemsTheSame(
                 @NonNull ChatMessage oldMsg, @NonNull ChatMessage newMsg) {
             // Message properties may have changed if reloaded from the DB, but ID is fixed
-            return oldMsg.getMessageId() == newMsg.getMessageId();
+            return (oldMsg.getMessageId() == newMsg.getMessageId()) && (oldMsg.getText().equals(newMsg.getText()));
         }
         @Override
         public boolean areContentsTheSame(

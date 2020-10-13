@@ -181,7 +181,7 @@ public class TextChatFragment extends Fragment implements SignalListener {
         mMsgEditText.setMaxWidth(displaymetrics.widthPixels - (int)getResources().getDimension(R.dimen.edit_text_width));
 
         try {
-            mMessageAdapter = new MessagesAdapter(messagesList);
+            mMessageAdapter = new MessagesAdapter();
             mRecyclerView.setAdapter(mMessageAdapter);
         } catch (Exception e) {
             e.printStackTrace();
@@ -330,7 +330,7 @@ public class TextChatFragment extends Fragment implements SignalListener {
     public void restart(){
         messagesList = new ArrayList<ChatMessage>();
         try {
-            mMessageAdapter = new MessagesAdapter(messagesList);
+            mMessageAdapter = new MessagesAdapter();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -390,7 +390,7 @@ public class TextChatFragment extends Fragment implements SignalListener {
                 public void run() {
                     if (!checkMessageGroup(msg)) {
                         messagesList.add(msg);
-                        mMessageAdapter.submitList(messagesList);
+                        mMessageAdapter.submitList(new ArrayList<>(messagesList));
                     } else {
                         //concat text for the messages group
                         String msgText = messagesList.get(messagesList.size() - 1).getText() + "\r\n" + msg.getText();
@@ -400,7 +400,7 @@ public class TextChatFragment extends Fragment implements SignalListener {
                             e.printStackTrace();
                         }
                         messagesList.set(messagesList.size() - 1, msg);
-                        mMessageAdapter.submitList(messagesList);
+                        mMessageAdapter.submitList(new ArrayList<>(messagesList));
                     }
 
                     mRecyclerView.smoothScrollToPosition(mMessageAdapter.getItemCount() - 1); //update based on adapter
