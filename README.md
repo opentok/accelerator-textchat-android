@@ -1,3 +1,5 @@
+**This project is no longer maintained. Please use [accelerator-core-android](https://github.com/opentok/accelerator-core-android]) instead**
+
 # Accelerator TextChat for Android
 
 [![Build Status](https://travis-ci.org/opentok/accelerator-textchat-android.svg?branch=master)](https://travis-ci.org/opentok/accelerator-textchat-android)
